@@ -37,14 +37,17 @@ for div in div_list:
     urls.append(div.xpath('.//img/@src'))
     
 import requests
-i = 1
+i = 0
 for item in urls:
+    i = i+1
     if len(item) > 0:
-        url = "http:"+item[0]
+        if "http:" in item[0]:
+            url = item[0]
+        else:
+            url = "http:"+item[0]
         response = requests.get(url)
         with open('D:/zgs/pdf/'+str(i)+'.png', 'wb') as f:
             f.write(response.content)
-        i = i+1
     else:
         print(item)  # 打印未加载出来的页面
 
